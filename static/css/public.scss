@@ -1,0 +1,22 @@
+@mixin flex($direction){
+  display: flex;
+  display: -webkit-flex;
+  flex-direction:$direction;
+}
+
+//vue animation style
+.fade{
+  &-enter,&-leave-active{
+    opacity: 0;
+  }
+  &-enter-active,&-leave-active{
+    transition: opacity .5s;
+  }
+}
+
+// .fade-enter,.fade-leave-active{
+//   opacity: 0;
+// }
+// .fade-enter-active,.fade-leave-active{
+//   transition: opacity .5s;
+// }

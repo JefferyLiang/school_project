@@ -1,21 +1,28 @@
 <template>
-  <div id="index">
-    <div class="index-header">
-      <img :src="top_image" style="width:100%;">
-      <span class="title">Jeffery Animation Web</span>
-    </div>
-    <div class="index-body">
-      <navbar></navbar>
-      <div class="body-content" v-for="item in contetnList">
-        <card :imgUrl="item.imgUrl" :text="item.textList"></card>
+  <div id="index" >
+    <transition name="fade">
+      <loadding :text.String='loadMessage' @hide="show = true"></loadding>
+    </transition>
+    <transition name="fade">
+      <div v-show="show" style="position:relative;z-index:4">
+        <div class="index-header">
+          <img :src="top_image" style="width:100%;">
+          <span class="title">Jeffery Animation Web</span>
+        </div>
+        <div class="index-body">
+          <navbar :follow="true"></navbar>
+          <div class="body-content" v-for="item in contetnList">
+            <card :imgUrl="item.imgUrl" :text="item.textList"></card>
+          </div>
+          <div class="index-read-more">
+            <span class="read-more-title">READ MORE</span>
+          </div>
+        </div>
+        <div class="index-footer">
+          <detail></detail>
+        </div>
       </div>
-      <div class="index-read-more">
-        <span class="read-more-title">READ MORE</span>
-      </div>
-    </div>
-    <div class="index-footer">
-      <detail></detail>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -23,11 +30,13 @@
 import navbar from '@/components/navbar.vue'
 import card from '@/components/messageCard.vue'
 import detail from '@/components/author.vue'
+import loadding from '@/components/loadding.vue'
 export default {
   components:{
     navbar:navbar,
     card:card,
-    detail:detail
+    detail:detail,
+    loadding:loadding
   },
   data() {
     return {
@@ -44,13 +53,21 @@ export default {
           cardType: 'INTRODUCTION', title: 'Title in this',date: '2017.03.02',
           mainText: 'this is the main text,try to include this components.文字测试'
         }
-      }]
+      }],
+      shouldshow: false,
+      show: false,
+      loadding:'',
+      loadMessage: 'Jeffery Website'
     }
+  },
+  methods:{
+
   }
 }
 </script>
 
 <style lang="scss" scoped>
+@import './static/css/public.scss';
 $background-color: rgba(232, 238, 238,1);
 @mixin flex($direction){
   display: flex;
@@ -59,6 +76,14 @@ $background-color: rgba(232, 238, 238,1);
 }
 #index{
   position:relative;
+  height: 100%;
+}
+.loading-view{
+  width:100%;
+  height: 100%;
+  @include flex(column);
+  justify-content: center;
+  
 }
 .index-header{
   position: fixed;

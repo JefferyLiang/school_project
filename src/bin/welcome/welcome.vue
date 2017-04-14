@@ -97,7 +97,6 @@ export default {
 	//内部方法
 	methods: {
 		go() {
-			console.log(this);
 			this.shouldDestroy = false;
 			setTimeout(()=>{
 				this.$router.push('index');

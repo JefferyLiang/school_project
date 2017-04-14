@@ -1,5 +1,8 @@
 <template>
   <div class="self-navbar">
+    <transition name='fade'>
+      <span v-show="shouldFollow" class="title">Jeffery Website</span>
+    </transition>
     <span class="flex"></span>
     <ul class="navbar-items">
       <li v-for="item in items"><a href="#">{{ item.name }}</a></li>
@@ -13,6 +16,12 @@
 
 <script>
 export default {
+  props:{
+    follow:{
+      type:Boolean,
+      default: false
+    }
+  },
   data () {
     return {
       items:[{
@@ -24,16 +33,56 @@ export default {
       },{
         name: 'FOLLOW'
       }],
-      search: ''
+      search: '',
+      width: 0,
+      top: 0,
+      shouldFollow: false
+    }
+  },
+  mounted () {
+    this.getMessage();
+  },
+  created () {
+    if(this.follow){
+      window.addEventListener('scroll',() => {
+        let number = (window.scrollY - this.top) > 0;
+        if(number === this.shouldFollow) return;
+        if(number !== this.shouldFollow){
+          this.shouldFollow = number;
+          this.setFollow();
+        }
+      })
     }
   },
   methods: {
-
+    getMessage () {
+      let that = $(this.$el);
+      if(that[0].clientHeight == 0) return setTimeout(this.getMessage,500);
+      this.width = that[0].clientWidth;
+      this.getTop(that);
+    },
+    getTop(item) {
+      this.top += item[0].offsetTop;
+      if(item[0].offsetParent){
+        return this.getTop($(item[0].offsetParent));
+      }else{
+        return true;
+      }
+    },
+    setFollow () {
+      let that = $(this.$el);
+      if(this.shouldFollow){
+        that.css({'width':this.width+'px','position':'fixed','top':'0','left':'0','z-index':'10','background-color':'#e8eeee'});
+      }else{
+        that.css({'width':'100%','position':'static','background-color':'transparent'});
+      }
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+@import './static/css/public.scss';
 $fontColor:#6b6b71;
 ul,li{
   list-style: none;
@@ -44,6 +93,12 @@ ul,li{
   display: -webkit-flex;
   flex-direction: $direction;
   align-items: center;
+}
+.title{
+  font-size:2rem;
+  font-weight: bold;
+  margin-left:2rem;
+  //opacity: 1;
 }
 .self-navbar{
   @include flex(row);

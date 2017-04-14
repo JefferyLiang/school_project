@@ -66,6 +66,10 @@ export default {
         iconName: 'github',
         textName: 'min blog project',
         link: 'https://github.com/JefferyLiang/min-blog'
+      },{
+        iconName: 'github',
+        textName: 'school-project',
+        link: 'https://github.com/JefferyLiang/school_project'
       }],
       tagList:[{
         name: 'Vue.js',link: 'https://cn.vuejs.org'
@@ -156,6 +160,8 @@ export default {
 }
 .detail-link{
   width:100%;
+  @include flex(row);
+  flex-wrap: wrap;
   margin:{
     top:2rem;
     bottom:2rem;
