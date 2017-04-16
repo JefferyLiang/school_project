@@ -8,8 +8,10 @@ Vue.config.productionTip = false
 import '@/modules/bootstrap'
 //加载vue-svg-icon
 import '@/modules/svgConfig'
-//加载vue-heighlight
-import '@/modules/heighlight'
+//加载highlight.js
+import '@/modules/highlight'
+//加载vue-resource
+import '@/modules/resource'
 //加载vuex
 import '@/modules/vuex'
 import store from '@/store/index'

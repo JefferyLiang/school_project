@@ -1,5 +1,6 @@
 <template>
   <div class="loadding-view" v-show="show" @:finish="hide">
+    <span>Loadding the image resource,please wait...</span>
     <span>
       {{ span_text }}
       <!-- <div class="line" :style="lineWidth"></div> -->
@@ -23,7 +24,7 @@ export default {
     return {
       show:true,
       imgFinish: false,
-      span_text:'',
+      span_text:' ',
       loadding:0,
       loaded:0,
     }
@@ -140,6 +141,7 @@ export default {
 @import './static/css/public.scss';
 .loadding-view{
   @include flex(column);
+  position:relative;
   justify-content: center;
   align-items: flex-start;
   height: 100%;
@@ -147,6 +149,14 @@ export default {
   background-image: linear-gradient(-180deg, rgba(255,255,255,0.50) 0%, rgba(0,0,0,0.50) 100%);
   background-blend-mode: lighten;
   span{
+    &:first-child{
+      position:absolute;
+      top:40%;
+      width:100%;
+      font-family: 'Cormorant Upright',serif;
+      font-size: 2rem;
+      text-align: center;
+    }
     font-size: 3rem;
     font-family: 'Cormorant Upright',serif;
     margin:0px auto;

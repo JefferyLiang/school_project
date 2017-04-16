@@ -12,6 +12,7 @@ export default {
 
 <style lang='scss'>
 @import './static/css/font.scss';
+@import './static/css/markDown.scss';
 #app {
   font-family: 'Noto Sans','Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

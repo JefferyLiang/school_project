@@ -94,7 +94,6 @@ export default {
 		setTimeout(()=>{
 			self.shouldShowDetail = true;
 		},1000);
-		console.log(this.count);
 	},
 	//内部方法
 	methods: {

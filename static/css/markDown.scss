@@ -1,0 +1,27 @@
+hr,blockquote{
+  border-color:#333!important;
+}
+
+hr{
+  margin:{
+    top:1rem!important;
+    bottom:3rem!important;
+  }
+}
+
+blockquote{
+  padding: .2rem 20px!important;
+  margin: .2rem 0px;
+}
+
+p{
+  font-size:1.6rem;
+}
+
+li{
+  font-size:1.3rem;
+}
+
+.hljs{
+  background:transparent!important;
+}

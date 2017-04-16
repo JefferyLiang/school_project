@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <navbar :follow="true" :background="'rgb(232, 238, 233)'" class="navbar-style"></navbar>
+    <navbar :follow="true" :background="'rgba(232, 238, 233,0)'" class="navbar-style"></navbar>
     <div class="introduct-detail">
       <img class="image-style" :src="img" alt="">
       <div class="introduct-message">
@@ -12,13 +12,14 @@
       </div>
     </div>
     <div class="page-body">
-      
+      <div class="mark-down" v-html="markdown_text" v-highlight></div>
     </div>
   </div>
 </template>
 
 <script>
 import navbar from '@/components/navbar.vue'
+import marked from 'marked'
 export default {
   components:{
     navbar:navbar
@@ -28,11 +29,29 @@ export default {
       img: require('@/assets/img/page/123039ca-b687-4275-85f5-57d3a4e185f7.jpg'),
       tagList:["CSS","Javascript","JQuery"],
       title: '实现等待页面图片资源加载的Loading动画制作思路与代码实现',
-      date: '2017.04.15'
+      date: '2017.04.15',
+      text: ''
     }
   },
+  filters:{
+    marked: marked
+  },
   created () {
-
+    this.getMarkDown();
+  },
+  methods: {
+    getMarkDown () {
+      this.$http.get('/static/markdown/text.md').then(response => {
+       this.text = response.body;
+      },response => {
+        console.log('Error')
+      })
+    }
+  },
+  computed: {
+    markdown_text () {
+      return marked(this.text);
+    }
   }
 }
 </script>
@@ -116,7 +135,10 @@ $background-color:rgb(232, 238, 233);
 }
 .page-body{
   width:100%;
+  padding: 2rem 20%;
   background-color:$background-color;
-  height: 400px;
+  .mark-down{
+    text-align: left;
+  }
 }
 </style>
