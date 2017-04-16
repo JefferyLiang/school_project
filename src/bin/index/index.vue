@@ -1,10 +1,10 @@
 <template>
   <div id="index" >
     <transition name="fade">
-      <loadding :text.String='loadMessage' @hide="show = true"></loadding>
+      <loadding :text.String='loadMessage' @hide="loaddingFinish" :run="loaddingNow" v-show="loaddingNow"></loadding>
     </transition>
     <transition name="fade">
-      <div v-show="show" style="position:relative;z-index:4">
+      <div v-show="!loaddingNow" style="position:relative;z-index:4">
         <div class="index-header">
           <img :src="top_image" style="width:100%;">
           <span class="title">Jeffery Animation Web</span>
@@ -12,7 +12,7 @@
         <div class="index-body">
           <navbar :follow="true"></navbar>
           <div class="body-content" v-for="item in contetnList">
-            <card :imgUrl="item.imgUrl" :text="item.textList"></card>
+            <card :imgUrl="item.imgUrl" :text="item.textList" :to="item.to"></card>
           </div>
           <div class="index-read-more">
             <span class="read-more-title">READ MORE</span>
@@ -31,6 +31,7 @@ import navbar from '@/components/navbar.vue'
 import card from '@/components/messageCard.vue'
 import detail from '@/components/author.vue'
 import loadding from '@/components/loadding.vue'
+import { mapMutations } from 'vuex'
 export default {
   components:{
     navbar:navbar,
@@ -46,22 +47,30 @@ export default {
         textList: {
           cardType: 'INTRODUCTION', title: 'Title in this',date: '2017.03.02',
           mainText: 'this is the main text,try to include this components.文字测试'
-        }
+        },
+        to:'/page/1'
       },{
         imgUrl: require('@/assets/img/index/de5d3b47-d980-46d0-af7e-aacb5332812e.jpg'),
         textList: {
           cardType: 'INTRODUCTION', title: 'Title in this',date: '2017.03.02',
           mainText: 'this is the main text,try to include this components.文字测试'
-        }
+        },
+        to:'/page/1'
       }],
-      shouldshow: false,
-      show: false,
       loadding:'',
       loadMessage: 'Jeffery Website'
     }
   },
   methods:{
-
+    loaddingFinish () {
+      this.$store.commit('loaddingFinish');
+    }
+  },
+  computed: {
+    loaddingNow: function () {
+      if(this.$store.state.from.name === 'welcome') return this.$store.state.loadding;
+      return false;
+    }
   }
 }
 </script>

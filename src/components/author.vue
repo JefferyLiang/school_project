@@ -225,16 +225,15 @@ export default {
       &:before{
         content: '[';
         left: -10px;
-        opacity: 0;
       }
       &:after{
         content: ']';
         right: -10px;
-        opacity: 0;
       }
       &:after,&:before{
         position: absolute;
         bottom:0px;
+        opacity: 0;
         transition: all .3s;
       }
       &:hover{

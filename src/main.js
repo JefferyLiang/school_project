@@ -10,10 +10,14 @@ import '@/modules/bootstrap'
 import '@/modules/svgConfig'
 //加载vue-heighlight
 import '@/modules/heighlight'
+//加载vuex
+import '@/modules/vuex'
+import store from '@/store/index'
 //加载vue-router
 import router from './router'
 
 router.beforeEach((to,from,next)=>{
+  store.state.from = from;
   next();
 })
 
@@ -21,6 +25,7 @@ router.beforeEach((to,from,next)=>{
 const vm = new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 })

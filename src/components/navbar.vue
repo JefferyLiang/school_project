@@ -1,7 +1,7 @@
 <template>
   <div class="self-navbar">
     <transition name='fade'>
-      <span v-show="shouldFollow" class="title">Jeffery Website</span>
+      <router-link tag="span" to="/index" v-show="shouldFollow || top == 0" class="title">Jeffery Website</router-link>
     </transition>
     <span class="flex"></span>
     <ul class="navbar-items">
@@ -20,6 +20,10 @@ export default {
     follow:{
       type:Boolean,
       default: false
+    },
+    background:{
+      type:String,
+      default: '#e8eeee'
     }
   },
   data () {
@@ -72,7 +76,7 @@ export default {
     setFollow () {
       let that = $(this.$el);
       if(this.shouldFollow){
-        that.css({'width':this.width+'px','position':'fixed','top':'0','left':'0','z-index':'10','background-color':'#e8eeee'});
+        that.css({'width':this.width+'px','position':'fixed','top':'0','left':'0','z-index':'10','background-color':this.background});
       }else{
         that.css({'width':'100%','position':'static','background-color':'transparent'});
       }
@@ -106,6 +110,7 @@ ul,li{
   background-color:transparent;
   padding:0px 20px;
   font-family: "Cormorant Upright",serif;
+  transition:background-color .5s;
 }
 .flex{
   flex:99;

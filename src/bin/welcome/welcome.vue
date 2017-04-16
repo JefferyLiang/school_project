@@ -71,6 +71,7 @@
 
 <script type="text/javascript">
 import dlg from '@/components/Modal.vue'
+import { mapState } from 'vuex'
 export default {
 	components:{
 		dlg:dlg
@@ -93,6 +94,7 @@ export default {
 		setTimeout(()=>{
 			self.shouldShowDetail = true;
 		},1000);
+		console.log(this.count);
 	},
 	//内部方法
 	methods: {
@@ -106,7 +108,14 @@ export default {
 			console.log('UserName',this.user);
 			console.log('Password',this.password);
 		}
+	},
+	computed:{
+		local () {
+			return 123
+		},
+		...mapState(['count'])
 	}
+	
 };
 </script>
 

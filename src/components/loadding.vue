@@ -2,7 +2,7 @@
   <div class="loadding-view" v-show="show" @:finish="hide">
     <span>
       {{ span_text }}
-      <div class="line" :style="lineWidth"></div>
+      <!-- <div class="line" :style="lineWidth"></div> -->
     </span>
   </div>
 </template>
@@ -13,6 +13,10 @@ export default {
     text: {
       type:String,
       required: true
+    },
+    run: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -25,8 +29,10 @@ export default {
     }
   },
   mounted () {
-    this.getIamgeLoaded();
-    this.loaddingAnimation();
+    if(this.run){
+      this.getIamgeLoaded();
+      this.loaddingAnimation();
+    }
   },
   methods:{
     getIamgeLoaded () {
@@ -85,9 +91,7 @@ export default {
             clearInterval(interval);
             this.$emit('hide');
           }else{
-            if(this.loadding != this.loaded){
-              this.span_text += ' .';
-            }
+            this.span_text += ' .';
           }
         },1000);
       });
@@ -132,7 +136,7 @@ export default {
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 @import './static/css/public.scss';
 .loadding-view{
   @include flex(column);

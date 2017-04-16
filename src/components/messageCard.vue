@@ -3,12 +3,12 @@
     <div class="card-image">
       <img class="image-style" :src="imgUrl" style="width:100%;">
     </div>
-    <div class="card-text">
+    <router-link tag="div" :to="to" class="card-text">
       <span class="card-type">{{ text.cardType }}</span>
       <span class="title">{{ text.title }}</span>
       <span class="date">{{ text.date }}</span>
       <span class="text">{{ text.mainText }}</span>
-    </div>
+    </router-link>
   </div>
 </template>
 
@@ -16,7 +16,8 @@
 export default {
   props:{
     imgUrl:String,
-    text:Object
+    text:Object,
+    to:String
   },
   data () {
     return {
