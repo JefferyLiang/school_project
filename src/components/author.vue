@@ -121,6 +121,7 @@ export default {
     font-family: 'Cormorant Upright',serif;
     color:#6d5c5a;
     line-height: 1.1;
+    cursor: default;
   }
 }
 .left{
@@ -192,7 +193,6 @@ export default {
   list-style: none;
   margin-right:5%;
   padding:0px;
-  font-size:2rem;
   font-weight: normal;
   line-height: 1.1;
   font-family: "Cormorant Upright",serif;
@@ -222,6 +222,7 @@ export default {
       position:relative;
       color:#6d5c5a;
       cursor:pointer;
+      font-size:2rem!important;
       &:before{
         content: '[';
         left: -10px;

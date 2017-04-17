@@ -4,7 +4,7 @@
 
 > 为什么需要网页的加载动画界面
  
-```txt
+```
 主要目的如下:
 
 1. 网站可能需要长时间去加载某些重要的资源
@@ -106,7 +106,7 @@ checkImage () {
 
 如果不使用vue、angular等javascript库来实现，我们可以通过JQuery来控制，v-show的本质只是给dom加上了`display:none`这样的样式。如果你不想使用这些javascript，觉得学习成本高，可以去看一个watch.js的插件，可以实现数据双向绑定。
 
-在这里我还定义了一个事件`@finish`，用于通知夫控件加载已经完成。也可以通过JQuery或者原生的javascript来完成相同的效果。
+在这里我还定义了一个事件`@finish`，用于通知父控件加载已经完成。也可以通过JQuery或者原生的javascript来完成相同的效果。
 
 <br>
 
@@ -199,7 +199,7 @@ tweenString () {
       if(this.imgFinish){
         this.show = false;
         clearInterval(interval);//清理计时器
-        this.$emit('hide');//触发自定义的hide事件，该事件我们用于触发夫控件的改变，如果不是使用vue，可以省略掉这里
+        this.$emit('hide');//触发自定义的hide事件，该事件我们用于触发父控件的改变，如果不是使用vue，可以省略掉这里
       }else{
         this.span_text += ' .';
       }

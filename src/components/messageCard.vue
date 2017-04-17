@@ -3,12 +3,23 @@
     <div class="card-image">
       <img class="image-style" :src="imgUrl" style="width:100%;">
     </div>
-    <router-link tag="div" :to="to" class="card-text">
-      <span class="card-type">{{ text.cardType }}</span>
-      <span class="title">{{ text.title }}</span>
-      <span class="date">{{ text.date }}</span>
-      <span class="text">{{ text.mainText }}</span>
-    </router-link>
+    <div class="card-text">
+      <router-link tag="div" :to="to" class="text-link">
+        <span class="card-type">{{ text.cardType }}</span>
+        <span class="title">{{ text.title }}</span>
+        <span class="date">{{ text.date }}</span>
+        <span class="text">{{ text.mainText }}</span>
+      </router-link>
+      <div class="tag-list">
+        <span class="title">Tag:</span>
+        <ul class="tag-list">
+          <li class="tag-list-item"><a href="#">Javascript</a></li>
+          <li class="tag-list-item"><a href="#">Vue.js</a></li>
+          <li class="tag-list-item"><a href="#">animate</a></li>
+          <li class="tag-list-item"><a href="#">html</a></li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -28,6 +39,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "./static/css/public.scss";
 @mixin flex($direction){
   display: flex;
   display: -webkit-flex;
@@ -80,6 +92,7 @@ export default {
   margin-left: 5%;
   text-align: left;
   @include flex(column);
+  justify-content: space-between;
   .title{
     font-size:2rem;
     font-weight: 700;
@@ -108,5 +121,34 @@ export default {
 .image-style{
   width:100%;
   height: 300px;
+}
+.text-link{
+  @include flex(column);
+  cursor: pointer;
+  width:100%;
+}
+.tag-list{
+  @include flex(row);
+  flex-wrap: wrap;
+  .title{
+    width:100%;
+    font-family: "Cormorant Upright",serif;
+    font-size: 3rem;
+    font-weight: normal;
+    user-select: none;
+    cursor: default;
+  }
+  .item{
+    // @include link-KH;
+    font-family: "Cormorant Upright",serif;
+    margin:{
+      bottom:.5rem;
+      right:1.5rem;
+    }
+    font-size:2rem;
+  }
+}
+.tag-list{
+  @include tag-list;
 }
 </style>

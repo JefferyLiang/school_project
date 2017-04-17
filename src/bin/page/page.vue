@@ -37,6 +37,9 @@ export default {
   filters:{
     marked: marked
   },
+  updated () {
+    //this.getPreList();
+  },
   created () {
     let key = this.$route.params.id;
     this.getFileName().then((reuslt) => {
@@ -61,6 +64,16 @@ export default {
       },response => {
         console.log('Error')
       })
+    },
+    getPreList () {
+      let $code = document.getElementsByTagName('code');
+      console.log($code);
+      for(let value of $code){
+        console.log(value.classList);
+      }
+      // $Codes.forEach((index,item) => {
+      //   console.log();
+      // })
     }
   },
   computed: {

@@ -41,6 +41,73 @@
   }
 }
 
+@mixin tag-list{
+  list-style: none;
+  margin-right:5%;
+  padding:0px;
+  font-weight: normal;
+  line-height: 1.1;
+  font-family: "Cormorant Upright",serif;
+  @include flex(row);
+  flex-wrap: wrap;
+  .tag-list-item{
+    @include flex(row);
+    position: relative;
+    list-style: none;
+    margin:0;
+    padding:0;
+    border:0;
+    outline: 0;
+    margin-bottom:2rem;
+    color:#6d5c5a;
+    &:last-child{
+      &:after{
+        content:none;
+      }
+    }
+    &:after{
+      content:'/';
+      padding:0 1rem;
+      color:#6d5c5a;
+      font-size:2rem;
+    }
+    a{
+      position:relative;
+      color:#6d5c5a;
+      cursor:pointer;
+      font-size:2rem!important;
+      &:before{
+        content: '[';
+        left: -10px;
+      }
+      &:after{
+        content: ']';
+        right: -10px;
+      }
+      &:after,&:before{
+        position: absolute;
+        bottom:0px;
+        opacity: 0;
+        transition: all .3s;
+      }
+      &:hover{
+        &:before{
+          left: -5px;
+          opacity: 1;
+        }
+        &:after{
+          right: -5px;
+          opacity: 1;
+        }
+      }
+      &:hover,&:focus{
+        text-decoration: none;
+        outline: none;
+      }
+    }
+  }
+}
+
 //vue animation style
 .fade{
   &-enter,&-leave-active{
