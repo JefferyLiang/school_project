@@ -45,15 +45,8 @@ export default {
       contetnList: [{
         imgUrl: require('@/assets/img/index/de5d3b47-d980-46d0-af7e-aacb5332812e.jpg'),
         textList: {
-          cardType: 'INTRODUCTION', title: 'Title in this',date: '2017.03.02',
-          mainText: 'this is the main text,try to include this components.文字测试'
-        },
-        to:'/page/1'
-      },{
-        imgUrl: require('@/assets/img/index/de5d3b47-d980-46d0-af7e-aacb5332812e.jpg'),
-        textList: {
-          cardType: 'INTRODUCTION', title: 'Title in this',date: '2017.03.02',
-          mainText: 'this is the main text,try to include this components.文字测试'
+          cardType: 'INTRODUCTION', title: '网站加载动画效果',date: '2017.04.10',
+          mainText: '介绍制作网站页面加载动画效果的思路方法，与基于Vue.js如何实现一个伪命令行输入效果的页面加载动画。通过该动画让网站加载资源有更多的时间，如加载字体、图片等。'
         },
         to:'/page/1'
       }],

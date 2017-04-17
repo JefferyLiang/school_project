@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <navbar :follow="true" :background="'rgba(232, 238, 233,0)'" class="navbar-style"></navbar>
+    <navbar :follow="true" :background="'rgba(232, 238, 233,.9)'" class="navbar-style"></navbar>
     <div class="introduct-detail">
       <img class="image-style" :src="img" alt="">
       <div class="introduct-message">
@@ -30,18 +30,33 @@ export default {
       tagList:["CSS","Javascript","JQuery"],
       title: '实现等待页面图片资源加载的Loading动画制作思路与代码实现',
       date: '2017.04.15',
-      text: ''
+      text: '',
+      list:{}
     }
   },
   filters:{
     marked: marked
   },
   created () {
-    this.getMarkDown();
+    let key = this.$route.params.id;
+    this.getFileName().then((reuslt) => {
+      let name = this.list[key];
+      this.getMarkDown(name);
+    });
   },
   methods: {
-    getMarkDown () {
-      this.$http.get('/static/markdown/text.md').then(response => {
+    getFileName () {
+      let this_promise = new Promise( resolve => {
+        this.$http.get('/static/markdown/name.json').then(response => {
+          this.list = response.body;
+          resolve();
+        },response => {
+          console.log("Error");
+      })});
+      return this_promise;
+    },
+    getMarkDown (fileName) {
+      this.$http.get('/static/markdown/' + fileName).then(response => {
        this.text = response.body;
       },response => {
         console.log('Error')
