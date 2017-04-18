@@ -26,3 +26,31 @@ li{
   background:transparent!important;
   position:relative;
 }
+
+pre {  
+    position: relative;
+}
+code.has-numbering {  
+    margin-left: 26px;
+}
+.pre-numbering {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 26px;
+    height: 100%;
+    margin: 0px;
+    padding: 17px 4px;
+    background-color: #EEE;
+    text-align: right;
+    font-family: consolas, monospace;
+    font-size: 13pt;
+    line-height: 135%;
+    color: #AAA;
+    list-style: none;
+}
+.pre-numbering li {
+    margin: 0;
+    font-size:1.2rem;
+    line-height: 1.5;
+}

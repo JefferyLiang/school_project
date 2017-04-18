@@ -11,8 +11,8 @@
         </div>
         <div class="index-body">
           <navbar :follow="true"></navbar>
-          <div class="body-content" v-for="item in contetnList">
-            <card :imgUrl="item.imgUrl" :text="item.textList" :to="item.to"></card>
+          <div class="body-content" v-for="item in contentList">
+            <card :imgUrl="item.imgUrl" :text="item.textList" :to="item.to" :tagList="item.tag"></card>
           </div>
           <div class="index-read-more">
             <span class="read-more-title">READ MORE</span>
@@ -42,19 +42,30 @@ export default {
   data() {
     return {
       top_image: require('@/assets/img/top_image.jpg'),
-      contetnList: [{
-        imgUrl: require('@/assets/img/index/de5d3b47-d980-46d0-af7e-aacb5332812e.jpg'),
-        textList: {
-          cardType: 'INTRODUCTION', title: '网站加载动画效果',date: '2017.04.10',
-          mainText: '介绍制作网站页面加载动画效果的思路方法，与基于Vue.js如何实现一个伪命令行输入效果的页面加载动画。通过该动画让网站加载资源有更多的时间，如加载字体、图片等。'
-        },
-        to:'/page/1'
-      }],
+      cardList: [],
+      contentList: [],
       loadding:'',
       loadMessage: 'Jeffery Website'
     }
   },
+  created () {
+    this.getCardList();
+    this.$nextTick(() => {
+      setTimeout(() => {
+        for(let value of this.cardList){
+          this.contentList.push(value);
+        }
+      },500);
+    });
+  },
   methods:{
+    getCardList () {
+      this.$http.get('/static/markdown/name.json').then(response => {
+        this.cardList = response.body.list; 
+      },response => {
+        console.log("Error");
+      })
+    },
     loaddingFinish () {
       this.$store.commit('loaddingFinish');
     }

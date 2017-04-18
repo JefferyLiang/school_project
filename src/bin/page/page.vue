@@ -27,9 +27,9 @@ export default {
   data () {
     return {
       img: require('@/assets/img/page/123039ca-b687-4275-85f5-57d3a4e185f7.jpg'),
-      tagList:["CSS","Javascript","JQuery"],
-      title: '实现等待页面图片资源加载的Loading动画制作思路与代码实现',
-      date: '2017.04.15',
+      tagList:[],
+      title: '等待页面图片资源加载的Loading动画制作思路与代码实现',
+      date: '',
       text: '',
       list:{}
     }
@@ -39,24 +39,30 @@ export default {
   },
   updated () {
     //this.getPreList();
+
   },
   created () {
-    let key = this.$route.params.id;
-    this.getFileName().then((reuslt) => {
-      let name = this.list[key];
-      this.getMarkDown(name);
-    });
+    this.getFileName();
+    //this.getMarkDown(name);
   },
   methods: {
     getFileName () {
-      let this_promise = new Promise( resolve => {
-        this.$http.get('/static/markdown/name.json').then(response => {
-          this.list = response.body;
-          resolve();
-        },response => {
-          console.log("Error");
-      })});
-      return this_promise;
+      let key = parseInt(this.$route.params.id);
+      this.$http.get('/static/markdown/name.json').then(response => {
+        this.list = response.body.list;
+        for(let i=0;i<this.list.length;i++){
+          let item = this.list[i];
+          if(item.id === key){
+            console.log(item);
+            this.tagList = item.tag;
+            this.title = item.title;
+            this.date = item.textList.date;
+            this.getMarkDown(item.fileName);
+          }
+        }
+      },response => {
+        console.log(response);
+      })
     },
     getMarkDown (fileName) {
       this.$http.get('/static/markdown/' + fileName).then(response => {

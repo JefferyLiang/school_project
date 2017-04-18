@@ -199,7 +199,7 @@ tweenString () {
       if(this.imgFinish){
         this.show = false;
         clearInterval(interval);//清理计时器
-        this.$emit('hide');//触发自定义的hide事件，该事件我们用于触发父控件的改变，如果不是使用vue，可以省略掉这里
+        this.$emit('hide');//触发自定义的hide事件，该事件我们用于触发父控件的改变。
       }else{
         this.span_text += ' .';
       }

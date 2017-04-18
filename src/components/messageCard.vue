@@ -13,10 +13,7 @@
       <div class="tag-list">
         <span class="title">Tag:</span>
         <ul class="tag-list">
-          <li class="tag-list-item"><a href="#">Javascript</a></li>
-          <li class="tag-list-item"><a href="#">Vue.js</a></li>
-          <li class="tag-list-item"><a href="#">animate</a></li>
-          <li class="tag-list-item"><a href="#">html</a></li>
+          <li v-for="(item,index) in tagList" class="tag-list-item"><a href="#">{{ item }}</a></li>
         </ul>
       </div>
     </div>
@@ -28,7 +25,8 @@ export default {
   props:{
     imgUrl:String,
     text:Object,
-    to:String
+    to:String,
+    tagList:Array
   },
   data () {
     return {
