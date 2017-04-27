@@ -11,19 +11,58 @@
       "mainText":"介绍制作网站页面加载动画效果的思路方法，与基于Vue.js如何实现一个伪命令行输入效果的页面加载动画。通过该动画让网站加载资源有更多的时间，如加载字体、图片等。" 
     },
     "to":"/page/1",
-    "tag":["Javscript","html","Vue.js"]
+    "tag":["Javascript","html","Vue.js"]
   },{
     "id":2,
     "fileName":"linkAnimate.md",
-    "imgUrl":"/static/img/de5d3b47-d980-46d0-af7e-aacb5332812e.jpg",
+    "imgUrl":"/static/img/2f90cd9e-e7e7-4f1c-8897-36cecff2727d.jpg",
     "title":"纯净CSS3加HTML实现网站超链接标签效果hvoer动画效果",
     "textList":{
       "cardType":"ANIMATION",
       "title":"网站链接标签效果",
       "date":"2017.04.13",
-      "mainText":"分享几种用于超链接标签并让用户看到后耳目一新的效果..."
+      "mainText":"简单的介绍transition这一个CSS属性，并使用该属性编写一个用于超链接标签并让用户看到后耳目一新的效果..."
     },
     "to":"/page/2",
-    "tag":["CSS3","SCSS","HTML"]
+    "tag":["CSS3","SCSS","HTML","Aminate"]
+  },{
+    "id":3,
+    "fileName":"flexBoxIntroduct.md",
+    "imgUrl":"/static/img/991133d1-61b3-4449-aeb7-d0354c7fe24a.jpg",
+    "title":"CSS3新的布局方式，通过flex-box对网站进行布局",
+    "textList":{
+      "cardType":"INTRODUCTION",
+      "title":"如何使用flex-box进行弹性布局",
+      "date":"2017.4.15",
+      "mainText":"传统的html布局方式是通过position、display、float属性进行的，不过当我们有些特殊的布局难以实现，而且大家都知道float这个属性会引出很多问题，这才介绍一下CSS3新加入的flex-box布局方法。"
+    },
+    "to":"/page/3",
+    "tag":["Layout","CSS3","Website","Html"]
+  },{
+    "id":4,
+    "fileName":"htmlTag.md",
+    "imgUrl":"/static/img/2f90cd9e-e7e7-4f1c-8897-36cecff2727d.jpg",
+    "title":"使用HTML中的标签时的应该注意到的嵌套规则",
+    "textList":{
+      "cardType":"INTRODUCTION",
+      "title":"HTML标签使用时的一些嵌套规则",
+      "date":"2017.4.19",
+      "mainText":"HTML有很多不同的标签，某种意义上，其实你如何进行嵌套也不会出现太大的问题，不过遵守嵌套规则能够让别人更好的看懂你的代码，也方便日后维护。"
+    },
+    "to":"/page/4",
+    "tag":["HTML","Tag"]
+  },{
+    "id":5,
+    "fileName":"angularV2-cli-begin.md",
+    "imgUrl":"/static/img/Best-3-Ways-to-learn-AngularJS-from-home.png",
+    "title":"AngualrV4.0开发入坑指南:使用angular-cli建立自己的angular4.0应用",
+    "textList":{
+      "cardType":"INTRODUCTION",
+      "title":"使用angular-cli建立自己的项目",
+      "date":"2017.4.20",
+      "mainText":"看到最近angular4.0出来了，发现也有不少改动。据说对手机端各方面的支持和优化都厉害了很多，既然这么厉害，为什么不学一下呢。不如我们一起入坑吧！"
+    },
+    "to":"/page/5",
+    "tag":["angularJS_V4","angular-cli"]
   }]
 }

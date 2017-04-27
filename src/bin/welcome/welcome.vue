@@ -71,7 +71,7 @@
 
 <script type="text/javascript">
 import dlg from '@/components/Modal.vue'
-import { mapState } from 'vuex'
+import { mapState,mapMutations } from 'vuex'
 export default {
 	components:{
 		dlg:dlg
@@ -104,15 +104,20 @@ export default {
 			},500);
 		},
 		login() {
-			console.log('UserName',this.user);
-			console.log('Password',this.password);
-		}
+			this.$http.get('/static/json/user.json').then(response => {
+				let items = response.body.list;
+				this.$store.commit('setUser',{list:items[0]});
+			},response => {
+				console.log("Error");
+			});
+		},
+		//...mapMutations(['setUser'])
 	},
 	computed:{
 		local () {
 			return 123
 		},
-		...mapState(['count'])
+		...mapState(['count','currentUser'])
 	}
 	
 };

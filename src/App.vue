@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+      <router-view></router-view>
   </div>
 </template>
 
@@ -13,6 +13,7 @@ export default {
 <style lang='scss'>
 @import './static/css/font.scss';
 @import './static/css/markDown.scss';
+@import './static/css/public.scss';
 #app {
   font-family: 'Noto Sans','Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

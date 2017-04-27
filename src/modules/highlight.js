@@ -31,9 +31,11 @@ Vue.directive('highlight',el => {
     }
   }
   $('pre code').each(function() {
-    var lines = $(this).text().split('\n').length - 1;
+    let $this = $(this);
+    if($this[0].classList.value.includes('markdown')) return;
+    let lines = $this.text().split('\n').length - 1;
     if (lines < 4) return;  // 当行数小于4时不显示行号
-    var $numbering = $('<ol/>').addClass('pre-numbering');
+    let $numbering = $('<ol/>').addClass('pre-numbering');
     $(this)
         .addClass('has-numbering')
         .parent()

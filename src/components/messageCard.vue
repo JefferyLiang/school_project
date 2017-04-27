@@ -1,8 +1,8 @@
 <template>
   <div class='card'>
-    <div class="card-image">
-      <img class="image-style" :src="imgUrl" style="width:100%;">
-    </div>
+    <router-link class="card-image" :to="to" tag="div">
+      <img class="image-style" :src="imgUrl" :data-src="imgUrl" style="width:100%;">
+    </router-link>
     <div class="card-text">
       <router-link tag="div" :to="to" class="text-link">
         <span class="card-type">{{ text.cardType }}</span>
@@ -83,6 +83,7 @@ export default {
 .card-image{
   width:55%;
   z-index: 2;
+  cursor:pointer;
 }
 .card-text{
   z-index: 2;

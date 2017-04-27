@@ -11,15 +11,17 @@
         </div>
         <div class="index-body">
           <navbar :follow="true"></navbar>
-          <div class="body-content" v-for="item in contentList">
-            <card :imgUrl="item.imgUrl" :text="item.textList" :to="item.to" :tagList="item.tag"></card>
-          </div>
+          <transition-group>
+            <div class="body-content" v-for="(item,index) in contentList" :key="index">
+              <card :imgUrl="item.imgUrl" :text="item.textList" :to="item.to" :tagList="item.tag"></card>
+            </div>
+          </transition-group>
           <div class="index-read-more">
             <span class="read-more-title">READ MORE</span>
           </div>
         </div>
         <div class="index-footer">
-          <detail></detail>
+          <detail id="author"></detail>
         </div>
       </div>
     </transition>
@@ -31,7 +33,7 @@ import navbar from '@/components/navbar.vue'
 import card from '@/components/messageCard.vue'
 import detail from '@/components/author.vue'
 import loadding from '@/components/loadding.vue'
-import { mapMutations } from 'vuex'
+import { mapMutations,mapState } from 'vuex'
 export default {
   components:{
     navbar:navbar,
@@ -52,28 +54,40 @@ export default {
     this.getCardList();
     this.$nextTick(() => {
       setTimeout(() => {
-        for(let value of this.cardList){
-          this.contentList.push(value);
-        }
-      },500);
+        this.$store.commit('initialType');
+        this.showList();
+      },100);
     });
   },
   methods:{
     getCardList () {
-      this.$http.get('/static/markdown/name.json').then(response => {
-        this.cardList = response.body.list; 
+      this.$http.get('http://localhost:3010/file/markdown/list').then(response => {
+        this.cardList = response.body;
       },response => {
-        console.log("Error");
+        console.log('failed to get the markdown list!');
       })
     },
     loaddingFinish () {
       this.$store.commit('loaddingFinish');
+    },
+    showList () {
+      this.contentList = [];
+      for(let value of this.cardList){
+        if(this.filterType === '') this.contentList.push(value)
+        if(this.filterType !== '' && value.textList.cardType === this.filterType) this.contentList.push(value);
+      }
     }
   },
   computed: {
     loaddingNow: function () {
       if(this.$store.state.from.name === 'welcome') return this.$store.state.loadding;
       return false;
+    },
+    ...mapState(['filterType'])
+  },
+  watch:{
+    filterType:function(){
+      this.showList();
     }
   }
 }

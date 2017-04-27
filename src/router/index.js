@@ -5,12 +5,13 @@ import Hello from '@/components/Hello'
 import welcome from '@/bin/welcome/router'
 import index from '@/bin/index/router'
 import page from '@/bin/page/router'
+import edit from '@/bin/edit/router'
 
 Vue.use(Router)
 //配置路由信息
 const reRouter = { path: '*', redirect: '/' }
 
-const routes = [welcome,index,page,reRouter]
+const routes = [welcome,index,edit,page,reRouter]
 
 export default new Router({
   mode: 'history',

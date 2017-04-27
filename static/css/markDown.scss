@@ -27,6 +27,35 @@ li{
   position:relative;
 }
 
+.mark-down{
+  $blue:#337ab7;
+  $hoverBlue:#23527c;
+  p{
+    a{
+      position:relative;
+      &:after{
+        content: '';
+        position:absolute;
+        left: 0;
+        bottom: -8px;
+        width:100%;
+        background-color:$blue;
+        height: 1px;
+        opacity: 0;
+        transition: all .3s;
+      }
+      &:hover{
+        text-decoration:none;
+        &:after{
+          bottom: 0px;
+          opacity: 1;
+          background-color:$hoverBlue;
+        }
+      }
+    }
+  }
+}
+
 pre {  
     position: relative;
 }

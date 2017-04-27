@@ -215,6 +215,7 @@ export default {
     }
     &:after{
       content:'/';
+      font-size:2rem;
       padding:0 1rem;
       color:#6d5c5a;
     }

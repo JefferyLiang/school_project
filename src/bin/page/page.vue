@@ -2,7 +2,7 @@
   <div class="page">
     <navbar :follow="true" :background="'rgba(232, 238, 233,.9)'" class="navbar-style"></navbar>
     <div class="introduct-detail">
-      <img class="image-style" :src="img" alt="">
+      <img class="image-style" :src="imgUrl" alt="">
       <div class="introduct-message">
         <div class="tag-list">
           <span v-for="(item,index) in tagList">{{item}}</span>
@@ -26,43 +26,29 @@ export default {
   },
   data () {
     return {
-      img: require('@/assets/img/page/123039ca-b687-4275-85f5-57d3a4e185f7.jpg'),
+      imgList: [require('@/assets/img/page/123039ca-b687-4275-85f5-57d3a4e185f7.jpg'),require('@/assets/img/page/0a8c9621-60dc-4696-b5d1-37f595e8114b.jpg')],
       tagList:[],
-      title: '等待页面图片资源加载的Loading动画制作思路与代码实现',
+      title: '',
       date: '',
       text: '',
       list:{}
     }
   },
-  filters:{
-    marked: marked
-  },
-  updated () {
-    //this.getPreList();
-
-  },
   created () {
     this.getFileName();
-    //this.getMarkDown(name);
   },
   methods: {
     getFileName () {
       let key = parseInt(this.$route.params.id);
-      this.$http.get('/static/markdown/name.json').then(response => {
-        this.list = response.body.list;
-        for(let i=0;i<this.list.length;i++){
-          let item = this.list[i];
-          if(item.id === key){
-            console.log(item);
-            this.tagList = item.tag;
-            this.title = item.title;
-            this.date = item.textList.date;
-            this.getMarkDown(item.fileName);
-          }
-        }
+      this.$http.get('http://localhost:3010/file/markdown/findById/'+ key).then(response => {
+        this.list = response.body[0];
+        this.tagList = this.list.tag;
+        this.title = this.list.title;
+        this.date = this.list.date;
+        this.getMarkDown(this.list.fileName);
       },response => {
-        console.log(response);
-      })
+        console.log('failed to get markdown message');
+      });
     },
     getMarkDown (fileName) {
       this.$http.get('/static/markdown/' + fileName).then(response => {
@@ -85,6 +71,9 @@ export default {
   computed: {
     markdown_text () {
       return marked(this.text);
+    },
+    imgUrl () {
+      return this.imgList[0];
     }
   }
 }
@@ -92,6 +81,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "./static/css/public.scss";
+@import "./static/css/markDown.scss";
 $background-color:rgb(232, 238, 233);
 .navbar-style{
   z-index:10!important;

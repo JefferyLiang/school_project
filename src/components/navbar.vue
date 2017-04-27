@@ -5,7 +5,10 @@
     </transition>
     <span class="flex"></span>
     <ul class="navbar-items">
-      <li v-for="item in items"><a href="#">{{ item.name }}</a></li>
+      <li v-for="item in items">
+        <a @click="changefilterType(item.name)" style="cursor:pointer;">{{ item.name }}</a>
+      </li>
+      <li><router-link tag="a" to="/edit" v-show="islogin">EDIT</router-link></li>
     </ul>
     <div class="input-icon-group">
       <input class="inputStyle" type="text" v-model="search" placeholder="Search">
@@ -15,6 +18,7 @@
 </template>
 
 <script>
+import { mapState,mapMutations } from 'vuex'
 export default {
   props:{
     follow:{
@@ -80,7 +84,22 @@ export default {
       }else{
         that.css({'width':'100%','position':'static','background-color':'transparent'});
       }
-    }
+    },
+    changefilterType (typeName) {
+      if(typeName === 'AUTHOR'){
+        window.location.hash = '#author';
+        return;
+      }
+      this.$store.commit('changeType',{typeName: typeName});
+    },
+    ...mapMutations(['changeType'])
+  },
+  computed:{
+    islogin () {
+      if(this.$store.state.currentUser===null) return false;
+      return true;
+    },
+    ...mapState(['currentUser','filterType'])
   }
 }
 </script>
@@ -102,6 +121,7 @@ ul,li{
   font-size:2rem;
   font-weight: bold;
   margin-left:2rem;
+  cursor:pointer;
   //opacity: 1;
 }
 .self-navbar{
