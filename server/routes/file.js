@@ -15,7 +15,7 @@ router.all('*', function(req, res, next) {
   res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
 
   if (req.method == 'OPTIONS') {
-    res.send(200); /让options请求快速返回/
+    res.send(200); /*让options请求快速返回*/
   }
   else {
     next();
@@ -64,8 +64,11 @@ router.post('/createMarkdown',(req,res,next) => {
 //get markdown list
 router.get('/markdown/list',(req,res,next) => {
   let query = link.queryAllmdList(req,res,next);
-  query.then((results) => {
-    res.send(results);
+  query.then( results => {
+    res.status(200).send(results);
+  });
+  query.catch( err => {
+    res.status(400).send(err);
   })
 });
 //find markdown item
@@ -97,6 +100,20 @@ router.post('/markdown/insert',(req,res,next) => {
   let sql = head + " " + key + " VALUES "+ value;
   link.insertOneList(req,res,next,sql);
 });
-
+//delete one list by filename
+router.post('/markdown/deleteByFilename/:filename',(req,res,next) => {
+  let filename = req.params.filename;
+  if(filename === undefined){
+    res.send(400);
+    return;
+  }
+  let results = link.deleteByFilename(req,res,next,filename);
+  results.then( value => {
+    res.status(200).send(value);
+  });
+  results.catch( err => {
+    res.status(400).send(err);
+  } )
+})
 
 module.exports = router;

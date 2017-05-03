@@ -14,12 +14,13 @@ module.exports = {
     return connection;
   },
   queryAllmdList (req,res,next) {
-    var self = this;
+    let self = this;
     let connection = self.link();
-    return new Promise(resolve => {
+    return new Promise((resolve,reject) => {
       connection.query('SELECT * FROM website.mdList;',(err,results,fields) => {
+        connection.end();
         if(err){
-          res.status(400)
+          rejcet(err);
           return;
         }
         if(results){
@@ -32,14 +33,13 @@ module.exports = {
             }
             item.tag = tagList;
           });
+          resolve(results);
         }
-        connection.end();
-        resolve(results);
       })
     });
   },
   queryOnemdList (req,res,next,id) {
-    var self = this;
+    let self = this;
     let connection = self.link();
     connection.query('SELECT * FROM website.mdList WHERE id ='+ id + ';',(err,results,fields) => {
       if(err){
@@ -54,7 +54,7 @@ module.exports = {
     });
   },
   insertOneList (req,res,next,sql) {
-    var self = this;
+    let self = this;
     let connection = self.link();
     connection.query(sql,(err,results,fields) => {
       if(err){
@@ -66,6 +66,22 @@ module.exports = {
       }
       connection.end();
     });
+  },
+  deleteByFilename (req,res,next,filename) {
+    var self = this;
+    let connection = self.link();
+    let queryStr = "DELETE FROM `website`.'mdList' WHERE `filename` = "+filename;
+    return new Promise( (resolve,rejcet) => {
+      connection.query(queryStr,(err,results,fields) => {
+        connection.end();
+        if(err){
+          reject(err);
+        }
+        if(results){
+          resolve(results);
+        }
+      });
+    })
   },
   formatResult (results) {
     let tagList = [];
