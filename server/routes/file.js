@@ -5,6 +5,10 @@ var path = require('path');
 
 var link = require('../public/javascripts/mysqlLink.js');
 
+var baseUrl = 'localhost:80';
+var pathUrl = '/static/markdown';
+var localhostPath = './static/markdown'
+
 router.get('/',function (req,res,next) {
   res.send('fileList');
 });
@@ -25,7 +29,7 @@ router.all('*', function(req, res, next) {
 router.get('/getMarkDownList',(req,res,next) => {
   let list = [];
   let this_promise = new Promise( resolve => {
-    fs.readdir('./static/markdown', (err,files) => {
+    fs.readdir( './static/markdown' , (err,files) => {
       if(err){
         resolve(false);
         return;

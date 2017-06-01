@@ -2,35 +2,16 @@
   <div class="edit">
     <navbar class="navbar-style"></navbar>
     <div class="page">
-      <div class="type-list">
-      <div class="item">
-        <span class="title">Type:</span>
-        <select class="select-style" v-model="selected">
-          <option v-for="(item,index) in selectList" value="item">{{ item }}</option>
-        </select>
-      </div>
-      <div class="item">
-        <span class="title">Min-Title:</span>
-        <input v-model="minTitle">
-      </div>
-      <div class="item area">
-        <span class="title">Min-Description</span>
-        <textarea v-model="minDescription" class="textarea-style" rows="5"></textarea>
-      </div>
-      <div class="item area">
-        <span class="title">markDownName:</span>
-        <input v-model="mdName" type="text">
-      </div>
-      </div>
+      <leftMenu class="left-menu"></leftMenu>
       <div class="layout-row">
         <div class="layout-column" style="flex:1.5">
           <span class="input-span">input you text</span>
-          <textarea class="textarea-style" v-model="text" cols="30" rows="10"></textarea>
+          <textarea class="textarea-style" :value="text" @input="update" cols="30" rows="10"></textarea>
           <button @click="createMarkDown()">发布</button>
         </div>
         <div class="layout-column left-line" style="flex:2">
           <span class="result-span">Result</span>
-          <span class="mark-down-style" v-html="markdown"></span>
+          <div class="mark-down-style" v-html="markdown" v-highlight></div>
         </div>
       </div>
     </div>
@@ -39,14 +20,16 @@
 
 <script>
 import marked from 'marked'
-import navbar from '@/components/navbar.vue';
+import navbar from '@/components/navbar.vue'
+import leftMenu from '@/components/left_menu.vue'
 export default {
   components:{
-    navbar:navbar
+    navbar:navbar,
+    leftMenu:leftMenu
   },
   data () {
     return {
-      text: '',
+      text: '123',
       selected: '',
       selectList:[],
       minTitle: '',
@@ -90,6 +73,9 @@ export default {
       this.$http.post('http://localhost:3010/file/createMarkdown',params).then(response => {},response => {
         console.log('create a new markdown file failed');
       })
+    },
+    update (e) {
+      this.text = e.target.value
     }
   },
 }
@@ -121,8 +107,8 @@ export default {
 }
 .layout-row{
   @include flex(row);
-  width: 60%;
-  margin:2rem 20%;
+  width: 50%;
+  margin:2rem 20% 0px 25%;
   flex:1;
 }
 .mark-down-style{
@@ -132,13 +118,6 @@ export default {
   //box-shadow: 0px 0px 5px rgba(0,0,0,.2);
   text-align: left;
 }
-.type-list{
-  @include flex(column);
-  position: fixed;
-  left: 0;
-  top: calc(2rem + 100px);
-  width:15%;
-}
 .textarea-style{
   margin:1rem 0px;
   flex:2;
@@ -146,36 +125,8 @@ export default {
   border:none;
   border-radius: 10px;
 }
-.select-style{
-  border:0;
-  flex:1;
-  border-radius: 0px;
-  margin:0rem 5px;
-}
 .title{
   margin:auto 2px;
-}
-.item{
-  @include flex(row);
-  width:90%;
-  margin:.5rem auto;
-  justify-content: center;
-}
-.area{
-  @include flex(column);
-  width:90%;
-  margin:.5rem auto;
-  text-align: left;
-  .textarea-style{
-    width:100%;
-    margin:.5rem 0px;
-    background-color:rgb(248,248,248);
-  }
-}
-input{
-  border:0;
-  background-color:rgb(248,248,248);
-  border-radius: 10px;
 }
 .layout-column{
   @include flex(column);
@@ -190,7 +141,11 @@ input{
   font-size:2rem;
   font-family: "Cormorant Upright",serif;
 }
-.left-line{
-  position:relative;
+.left-menu{
+  width:20%!important;
+  height: 100px!important;
+  //background-color:white;
+  position:fixed!important;
+  top:150px;
 }
 </style>

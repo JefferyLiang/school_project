@@ -40,7 +40,7 @@ export default {
   methods: {
     getFileName () {
       let key = parseInt(this.$route.params.id);
-      this.$http.get('http://localhost:3010/file/markdown/findById/'+ key).then(response => {
+      this.$http.get('http://www.liangscott.com:3010/file/markdown/findById/'+ key).then(response => {
         this.list = response.body[0];
         this.tagList = this.list.tag;
         this.title = this.list.title;

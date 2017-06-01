@@ -61,7 +61,7 @@ export default {
   },
   methods:{
     getCardList () {
-      this.$http.get('http://localhost:3010/file/markdown/list').then(response => {
+      this.$http.get('http://www.liangscott.com:3010/file/markdown/list').then(response => {
         this.cardList = response.body;
       },response => {
         console.log('failed to get the markdown list!');
