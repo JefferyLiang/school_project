@@ -1,4 +1,4 @@
-# angularJS V4.0 入坑指南:这次从cli开始
+# angular2 入坑指南:这次从cli开始
 
 ***
 
