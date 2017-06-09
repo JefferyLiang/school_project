@@ -86,7 +86,9 @@ export default {
         }));
       }
       Promise.all(arr).then(() => {
+        let i = 0;
         let interval = setInterval(() => {
+          if(i == 3) this.$emit('hide');
           if(this.imgFinish){
             this.show = false;
             clearInterval(interval);
@@ -94,6 +96,7 @@ export default {
           }else{
             this.span_text += ' .';
           }
+          i++;
         },1000);
       });
     },

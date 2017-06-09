@@ -2,7 +2,7 @@ import Vue from 'vue'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/googlecode.css'
 
-const tag = ['html','javascript','sass','scss','css','markdown']
+const tag = ['html','javascript','sass','scss','css','markdown','TypeScript','TS','Typescript','ts']
 
 Vue.directive('highlight',el => {
   let blocks = el.querySelectorAll('pre code');
