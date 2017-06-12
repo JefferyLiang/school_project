@@ -17,7 +17,7 @@
             </div>
           </transition-group>
           <div class="index-read-more">
-            <span class="read-more-title">READ MORE</span>
+            <span class="read-more-title" @click="showMore()">READ MORE</span>
           </div>
         </div>
         <div class="index-footer">
@@ -47,7 +47,9 @@ export default {
       cardList: [],
       contentList: [],
       loadding:'',
-      loadMessage: 'Jeffery Website'
+      loadMessage: 'Jeffery Website',
+      showNumber: 10,
+      timer: null
     }
   },
   created () {
@@ -56,7 +58,7 @@ export default {
       setTimeout(() => {
         this.$store.commit('initialType');
         this.showList();
-      },100);
+      },200);
     });
   },
   methods:{
@@ -72,10 +74,46 @@ export default {
     },
     showList () {
       this.contentList = [];
-      for(let value of this.cardList){
-        if(this.filterType === '') this.contentList.push(value)
-        if(this.filterType !== '' && value.textList.cardType === this.filterType) this.contentList.push(value);
+      if(this.filterStr === '' && this.filterType === ''){
+        let i = 0;
+        for(let value of this.cardList){
+          if(i >= this.showNumber) break;
+          this.contentList.push(value);
+        }
+      }else{
+        if(this.filterType === ''){
+          let i = 0
+          for(let value of this.cardList){
+            if(i >= this.showNumber) break;
+            i++;
+            if(value.title.includes(this.filterStr) || this.checkStrInTag(value.tag)) this.contentList.push(value);
+          }
+        }else if(this.filterStr === ''){
+          let i = 0;
+          for(let value of this.cardList){
+            if(i >= this.showNumber) break;
+            if(value.textList.cardType === this.filterType) this.contentList.push(value)
+            i++;
+          }
+        }else if(this.filterStr !== '' && this.filterType !== ''){
+          let i = 0;
+          for(let value of this.cardList){
+            if(i >= this.showNumber) break;
+            if(value.textList.cardType === this.filterType && (value.title.includes(this.filterStr) || this.checkStrInTag(value.tag))) this.contentList.push(value);
+            i++;
+          }
+        }
       }
+    },
+    checkStrInTag(arr){
+      for(let item of arr){
+        if(item.includes(this.filterStr)) return true;
+      }
+      return false;
+    },
+    showMore () {
+      this.showMore += 10;
+      this.showList();
     }
   },
   computed: {
@@ -83,11 +121,17 @@ export default {
       if(this.$store.state.from.name === 'welcome') return this.$store.state.loadding;
       return false;
     },
-    ...mapState(['filterType'])
+    ...mapState(['filterType','filterStr'])
   },
   watch:{
     filterType:function(){
       this.showList();
+    },
+    filterStr:function(){
+      clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
+        this.showList();
+      },500)
     }
   }
 }
@@ -145,6 +189,7 @@ $background-color: rgba(232, 238, 238,1);
     font-size: 4rem;
     color:#808085;
     font-family: "Cormorant Upright",serif;
+    cursor: pointer;
     &:before{
       content: "";
       position:absolute;

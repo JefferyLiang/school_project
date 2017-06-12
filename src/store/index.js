@@ -5,7 +5,8 @@ const store = new Vuex.Store({
     count: 0,
     loadding: true,
     currentUser: null,
-    filterType: ''
+    filterType: '',
+    filterStr: ''
   },
   mutations:{
     loaddingNow: (state) => {
@@ -22,6 +23,9 @@ const store = new Vuex.Store({
     },
     initialType: state => {
       state.filterType = '';
+    },
+    setFilterStr: (state,payload) => {
+      state.filterStr = payload.filterStr;
     }
   }
 })

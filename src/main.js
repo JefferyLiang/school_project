@@ -2,7 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-Vue.config.debug = true
+Vue.config.debug = false
 Vue.config.productionTip = false
 //加载bootstrap
 import '@/modules/bootstrap'

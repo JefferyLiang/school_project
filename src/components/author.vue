@@ -70,6 +70,10 @@ export default {
         iconName: 'github',
         textName: 'school-project',
         link: 'https://github.com/JefferyLiang/school_project'
+      },{
+        iconName: 'github',
+        textName: 'Learn Angualr 2',
+        link: 'https://github.com/JefferyLiang/LearnAngular2'
       }],
       tagList:[{
         name: 'Vue.js',link: 'https://cn.vuejs.org'

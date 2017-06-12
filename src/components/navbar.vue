@@ -11,7 +11,7 @@
       <li><router-link tag="a" to="/edit" v-show="islogin">EDIT</router-link></li>
     </ul>
     <div class="input-icon-group">
-      <input class="inputStyle" type="text" v-model="search" placeholder="Search">
+      <input class="inputStyle" type="text" v-model="filter" placeholder="Search">
       <icon class="iconStyle" name="search" scale="1.5"></icon>
     </div>
   </div>
@@ -41,10 +41,10 @@ export default {
       },{
         name: 'FOLLOW'
       }],
-      search: '',
       width: 0,
       top: 0,
-      shouldFollow: false
+      shouldFollow: false,
+      filter: ''
     }
   },
   mounted () {
@@ -92,14 +92,21 @@ export default {
       }
       this.$store.commit('changeType',{typeName: typeName});
     },
-    ...mapMutations(['changeType'])
+    ...mapMutations(['changeType','setFiltStr'])
   },
   computed:{
     islogin () {
       if(this.$store.state.currentUser===null) return false;
       return true;
     },
-    ...mapState(['currentUser','filterType'])
+    ...mapState(['currentUser','filterType','setFilterStr'])
+  },
+  watch:{
+    filter:function(){
+      this.$store.commit('setFilterStr',{
+        filterStr: this.filter
+      });
+    }
   }
 }
 </script>
