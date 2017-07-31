@@ -96,5 +96,18 @@ module.exports = {
       });
     }
     return results;
+  },
+  createReply (reply) {
+    let self = this
+    let connection = self.link()
+    let querystr = 'INSERT INTO `website`.`replayList` (`name`,`joinStatus`,`date`)' + `VALUES('${reply.name}',${reply.joinStatus},'${reply.date}');`
+    console.log(querystr)
+    return new Promise((resolve, reject) => {
+      connection.query(querystr, (err, results, fields) => {
+        connection.end()
+        if (err) reject(err)
+        if (results) resolve(results)
+      })
+    })
   }
 }

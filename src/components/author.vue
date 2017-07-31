@@ -13,6 +13,13 @@
         <div class="author-experience">
           2017年毕业于中山大学新华学院，软件工程专业。立志成为一名优秀的网页全栈工程师，并有意向网站设计与平面设计方向发展。初步涉猎了一些前端技术，比如angularJS、Vue.js、webpack和一些前端UI框架。也懂的如何编写自动化的Karma+Jasmine搭建的自动模块测试代码。有良好的技术自驱能力。正在学习ES6与一些设计方向的知识...
         </div>
+        <div class="font-list">
+          <span class="title">网站使用字体:</span>
+          <span>1.Cormorant Upright</span>
+          <span>2.Source Han Sans</span>
+          <span>3.Avenir</span>
+          <span>4.Helvetica</span>
+        </div>
         <div class="follow">
           <social class="follow-style" v-for="(item,index) in socialList" :iconName="item.iconName" :textName="item.textName" :link="item.link" :key="index"></social>
         </div>
@@ -82,15 +89,15 @@ export default {
       },{
         name: 'express',link: 'expressjs.com/zh-cn/'
       },{
-        name: 'node.js',link: 'https://nodejs.org/zh-cn'
+        name: 'Electron', link: 'https://electron.atom.io/'
       },{
         name: 'ES6',link: 'http://es6.ruanyifeng.com/'
       },{
-        name: 'mySQL',link: 'https://www.mysql.com/'
+        name: 'Typescript', link: 'https://www.typescriptlang.org/'
       },{
         name: 'CSS3',link: 'https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS3'
       },{
-        name: 'angular-material',link: 'https://material.angularjs.org/'
+        name: 'Ionic',link: 'http://ionicframework.com/docs/intro/installation/'
       },{
         name: 'Semantic UI',link: 'https://semantic-ui.com/'
       },{
@@ -98,9 +105,6 @@ export default {
       }],
       email: 'lzh.jeffery@gmail.com'
     }
-  },
-  methods: {
-
   }
 }
 </script>
@@ -257,6 +261,21 @@ export default {
         outline: none;
       }
     }
+  }
+}
+.font-list{
+  @include flex(row);
+  margin-top: 1rem;
+  flex-wrap: wrap;
+  .title{
+    font-family: "Source Hans";
+    width: 100%!important;
+    font-size: 1.6rem;
+  }
+  >span{
+    font-family: 'Cormorant Upright',serif;
+    width: 50%;
+    font-size: 1.5rem;
   }
 }
 </style>

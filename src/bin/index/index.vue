@@ -53,7 +53,7 @@ export default {
     }
   },
   created () {
-    this.getCardList();
+    setTimeout(this.getCardList(), 200)
     this.$nextTick(() => {
       setTimeout(() => {
         this.$store.commit('initialType');
@@ -65,6 +65,7 @@ export default {
     getCardList () {
       this.$http.get('http://www.liangscott.com:3010/file/markdown/list').then(response => {
         this.cardList = response.body;
+        console.log(this.cardList)
       },response => {
         console.log('failed to get the markdown list!');
       })

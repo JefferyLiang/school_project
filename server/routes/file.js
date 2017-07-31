@@ -120,4 +120,12 @@ router.post('/markdown/deleteByFilename/:filename',(req,res,next) => {
   } )
 })
 
+router.get('/getLink', (req,res,next) => {
+  //这里的失去抓取link的
+})
+
+router.get('/getMessage', (req,res,next) => {
+  //这里写抓去内容的代码  
+})
+
 module.exports = router;

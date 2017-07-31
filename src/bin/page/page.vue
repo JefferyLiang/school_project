@@ -26,7 +26,7 @@ export default {
   },
   data () {
     return {
-      imgList: [require('@/assets/img/page/123039ca-b687-4275-85f5-57d3a4e185f7.jpg'),require('@/assets/img/page/0a8c9621-60dc-4696-b5d1-37f595e8114b.jpg')],
+      imgList: [require('@/assets/img/page/123039ca-b687-4275-85f5-57d3a4e185f7.jpg'),require('@/assets/img/page/58373aae-8de4-4b32-95dc-8b2f8ebb91e6.jpg'),require('@/assets/img/page/c4b8fad2-1621-4f8e-92b8-477f0fbfd29c.jpg')],
       tagList:[],
       title: '',
       date: '',
@@ -73,7 +73,7 @@ export default {
       return marked(this.text);
     },
     imgUrl () {
-      return this.imgList[0];
+      return this.imgList[(this.$route.params.id%3)];
     }
   }
 }
